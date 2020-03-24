@@ -7,7 +7,7 @@
 
 ## Run
 
-`docker run --rm -it --name nginx-revprox -p 8999:8999  -e PORT=8999 -e TARGET=https://postman-echo.com theliebeskind/nginx-revprox
+`docker run --rm -it --name nginx-revprox -p 8999:8999  -e PORT=8999 -e TARGET=https://postman-echo.com thlcodes/nginx-revprox
 
 ## Licence
 
