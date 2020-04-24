@@ -1,0 +1,12 @@
+---
+applications:
+- name: gopher-shared-skeleton
+  routes:
+  - route: dev-gopher-shared-skeleton.apps.internal
+  memory: 64M
+  disk_quota: 64M
+  env:
+    ENV: development
+  command: ./bin
+  buildpacks:
+  - binary_buildpack_cached

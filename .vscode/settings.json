@@ -1,0 +1,12 @@
+{
+  "watch-run.targetList": [
+    {
+      "target": "**/config/*.yml",
+      "task": "task genfig"
+    },
+    {
+      "target": "**/internal/*.go",
+      "task": "task mocks"
+  }
+  ]
+}

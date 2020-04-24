@@ -1,0 +1,11 @@
+port: 8080
+grpcPort: 5050
+debug: true
+trace: true
+registry: "registry:5050"
+services:
+  storage: 
+    addr: "cache:5050"
+tracing:
+  uri: "https://6e7ed9df5d7c42bbacc763c28d01b5d2.apm.eu-west-1.aws.cloud.es.io:443"
+  secret: "fOs0KEjZVkG7PJuN0N"

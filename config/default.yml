@@ -1,0 +1,23 @@
+service:
+  name: gopher-shared-skeleton
+  version: v1
+port: 8080
+grpcPort: 5050
+host: ""
+basepath: ""
+trace: false
+apipath: "v1"
+registry: ""
+debug: false
+greeter:
+  hello: "Hello"
+  maxKnownUsers: 100
+  defaultName: "World"
+  inappropriateNames: ["Thomas", "idiot"] 
+services:
+  storage: 
+    addr: ""
+tracing:
+  service: ""
+  uri: ""
+  secret: ""

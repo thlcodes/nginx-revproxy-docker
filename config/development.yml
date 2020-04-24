@@ -1,0 +1,8 @@
+debug: true
+registry: "dev-gopher-core-registry.apps.internal:5050"
+services:
+  storage: 
+    addr: "dev-gopher-al-cache.apps.internal:50050"
+tracing:
+  service: "apmconfig"
+trace: true
