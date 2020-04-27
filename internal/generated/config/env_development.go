@@ -7,21 +7,15 @@ func init() {
 		Apipath:  "v1",
 		Basepath: "",
 		Debug:    true,
-		Greeter: ConfigGreeter{
-			DefaultName:        "World",
-			Hello:              "Hello",
-			InappropriateNames: []string{"Thomas", "idiot"},
-			MaxKnownUsers:      100,
-		},
 		GrpcPort: 5050,
 		Host:     "",
 		Port:     8080,
-		Registry: "dev-gopher-core-registry.apps.internal:5050",
 		Service: ConfigService{
-			Name:    "gopher-shared-skeleton",
-			Version: "v1",
+			Name:    "gopher-user-ecomy",
+			Version: "v0",
 		},
 		Services: ConfigServices{
+			Registry: "dev-gopher-core-registry.apps.internal:5050",
 			Storage: ConfigServicesStorage{
 				Addr: "dev-gopher-al-cache.apps.internal:50050",
 			},
@@ -33,5 +27,5 @@ func init() {
 			Uri:     "",
 		},
 	}
-	Envs.Development._map = map[string]interface{}{"apipath": "v1", "basepath": "", "debug": true, "greeter": map[interface{}]interface{}{"defaultName": "World", "hello": "Hello", "inappropriateNames": []interface{}{"Thomas", "idiot"}, "maxKnownUsers": 100}, "grpcPort": 5050, "host": "", "port": 8080, "registry": "dev-gopher-core-registry.apps.internal:5050", "service": map[interface{}]interface{}{"name": "gopher-shared-skeleton", "version": "v1"}, "services": map[interface{}]interface{}{"storage": map[interface{}]interface{}{"addr": "dev-gopher-al-cache.apps.internal:50050"}}, "trace": true, "tracing": map[interface{}]interface{}{"secret": "", "service": "apmconfig", "uri": ""}}
+	Envs.Development._map = map[string]interface{}{"apipath": "v1", "basepath": "", "debug": true, "grpcPort": 5050, "host": "", "port": 8080, "service": map[interface{}]interface{}{"name": "gopher-user-ecomy", "version": "v0"}, "services": map[interface{}]interface{}{"registry": "dev-gopher-core-registry.apps.internal:5050", "storage": map[interface{}]interface{}{"addr": "dev-gopher-al-cache.apps.internal:50050"}}, "trace": true, "tracing": map[interface{}]interface{}{"secret": "", "service": "apmconfig", "uri": ""}}
 }

@@ -8,7 +8,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"dev.beta.audi/gorepo/gopher_skeleton/internal/models"
+	"dev.beta.audi/gorepo/gopher-user-ecomy/internal/models"
 	"github.com/stretchr/testify/require"
 )
 

@@ -2,8 +2,8 @@ port: 8080
 grpcPort: 5050
 debug: true
 trace: true
-registry: "registry:5050"
 services:
+  registry: "registry:5050"
   storage: 
     addr: "cache:5050"
 tracing:

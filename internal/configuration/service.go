@@ -4,28 +4,22 @@ package configuration
 import (
 	"context"
 	"errors"
-	"fmt"
 	"log"
 	"os"
 	"strconv"
 
-	storagepb "dev.beta.audi/gorepo/lib_proto_models/golib/storage"
-
-	"dev.beta.audi/gorepo/gopher_skeleton/internal/repositories"
+	//storagepb "dev.beta.audi/gorepo/lib_proto_models/golib/storage"
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/opentracing/opentracing-go"
 
-	"dev.beta.audi/gorepo/lib_proto_models/golib/greeter"
-
 	"google.golang.org/grpc"
 
-	grpcdelivery "dev.beta.audi/gorepo/gopher_skeleton/internal/delivery/grpc"
-	"dev.beta.audi/gorepo/gopher_skeleton/internal/generated/config"
-	"dev.beta.audi/gorepo/gopher_skeleton/internal/usecases"
+	grpcdelivery "dev.beta.audi/gorepo/gopher-user-ecomy/internal/delivery/grpc"
+	"dev.beta.audi/gorepo/gopher-user-ecomy/internal/generated/config"
+	ecomypb "dev.beta.audi/gorepo/lib_proto_models/golib/ecomy"
 
 	"dev.beta.audi/gorepo/lib-go-common/bootstrap"
-	grpclib "dev.beta.audi/gorepo/lib-go-common/grpc"
 	"dev.beta.audi/gorepo/lib-go-common/tracing"
 )
 
@@ -45,7 +39,9 @@ NewService instantiates a new service.
 		- error:   The error describes why configuring the service failed.
 */
 func NewService(config *config.Config) (*Service, error) {
-	log.Printf("NewService with config: %#v", config)
+	if config.Debug {
+		log.Printf("NewService with config: %#v", config)
+	}
 
 	service := bootstrap.NewService()
 
@@ -64,24 +60,15 @@ func NewService(config *config.Config) (*Service, error) {
 	sd := discovery.NewGRPCDiscovery(regClient)
 	*/
 
-	storageConn, storageClient, err := connectToStorageAL( /*sd, */ config.Services.Storage.Addr)
+	/*storageConn, storageClient, err := connectToStorageAL( sd,  config.Services.Storage.Addr)
 	if err != nil {
 		return nil, err
-	}
+	}*/
 
-	greeterServer := grpcdelivery.NewGreeterServer(
-		config,
-		usecases.NewGreeter(
-			config,
-			repositories.NewPersistentStore(
-				config,
-				storageClient,
-			),
-		),
-	)
+	statusServer := grpcdelivery.NewEcomyServiceServer(config)
 
 	service.On(bootstrap.StoppedEvent, func() {
-		storageConn.Close()
+		//storageConn.Close()
 	})
 
 	if err := service.Configure(
@@ -89,23 +76,24 @@ func NewService(config *config.Config) (*Service, error) {
 		bootstrap.WithServiceConfig(
 			bootstrap.ServiceConfig{
 				Host:         config.Host,
-				HTTPPort:     fmt.Sprintf("%d", config.Port),
-				GRPCPort:     fmt.Sprintf("%d", config.GrpcPort),
-				RegistryAddr: config.Registry,
+				HTTPPort:     strconv.FormatInt(config.Port, 10),
+				GRPCPort:     strconv.FormatInt(config.GrpcPort, 10),
+				RegistryAddr: config.Services.Registry,
 			},
 		),
 		bootstrap.WithGRPCServer(func(s *grpc.Server) {
-			greeter.RegisterGreeterServiceServer(s, greeterServer)
+			ecomypb.RegisterEcomyServiceServer(s, statusServer)
 		}),
 		bootstrap.WithGRPCGateway(func(ctx context.Context, mux *runtime.ServeMux) {
+			//_ = ecomypb.RegisterEcomyServiceHandlerFromEndpoint(ctx, mux, ":"+strconv.FormatInt(config.GrpcPort, 10), []grpc.DialOption{grpc.WithInsecure()})
 			cc, err := grpc.Dial(":"+strconv.FormatInt(config.GrpcPort, 10), grpc.WithInsecure())
 			if err != nil {
 				panic(err)
 			}
-			_ = greeter.RegisterGreeterServiceHandler(ctx, mux, cc)
-			//_ = greeter.RegisterGreeterServiceHandlerClient(ctx, mux, &grpcdelivery.GreeterClient{Server: greeterServer})
+			_ = ecomypb.RegisterEcomyServiceHandler(ctx, mux, cc)
+
 		}),
-		bootstrap.WithAPIDocs(greeter.GetServiceSpecBytes),
+		bootstrap.WithAPIDocs(ecomypb.GetServiceSpecBytes),
 		bootstrap.WithDefaultHTTPServer(),
 		bootstrap.WithDefaultRegistration(),
 		bootstrap.WithDefaultGraceful(),
@@ -127,19 +115,19 @@ func NewService(config *config.Config) (*Service, error) {
 	return
 }*/
 
-func connectToStorageAL( /*sd discovery.ServiceDiscovery, */ addr string) (conn *grpc.ClientConn, client storagepb.StorageServiceClient, err error) {
-	/*var uri *url.URL
+/*func connectToStorageAL( sd discovery.ServiceDiscovery,  addr string) (conn *grpc.ClientConn, client storagepb.StorageServiceClient, err error) {
+	var uri *url.URL
 	uri, _, err = sd.ResolveURI(addr)
 	if err != nil {
 		return
-	}*/
+	}
 	conn, err = grpclib.DefaultConnectTo(addr)
 	if err != nil {
 		return
 	}
 	client = storagepb.NewStorageServiceClient(conn)
 	return
-}
+}*/
 
 func setupTracing(config *config.Config) (tracer opentracing.Tracer, err error) {
 	uri := config.Tracing.Uri

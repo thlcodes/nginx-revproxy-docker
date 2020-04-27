@@ -5,7 +5,6 @@ import (
 	"net"
 
 	"dev.beta.audi/gorepo/lib_proto_models/golib/registry"
-	"dev.beta.audi/gorepo/lib_proto_models/golib/storage"
 
 	"google.golang.org/grpc"
 
@@ -49,6 +48,7 @@ CreateStorageServerMock starts a goroutine with a gRPC server for the storage se
 	Returns:
 		- server: the reference to the gRPC server
 */
+/*
 func CreateStorageServerMock(storageMock storage.StorageServiceServer, address string) *grpc.Server {
 	listener, err := net.Listen("tcp", address)
 	gomega.Expect(err).NotTo(gomega.HaveOccurred(), "failed to listen: %v", err)
@@ -64,3 +64,4 @@ func CreateStorageServerMock(storageMock storage.StorageServiceServer, address s
 
 	return server
 }
+*/

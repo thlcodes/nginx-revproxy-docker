@@ -1,11 +1,11 @@
 <!-- Project Title -->
 
-# Skeleton platform service 
+# ecomy service 
 ![](https://img.shields.io/badge/App_Version-v0.1.1_latest-red.svg)
 ![](https://img.shields.io/badge/Api_Version-v1-green.svg)
 
 <!-- One Paragraph of project description goes here, it describes the functionality without details about the context in the system -->
-Purpose of this skeleton is to make the creation of a new platform service as easy and fast es possible.
+Purpose of this ecomy is to make the creation of a new platform service as easy and fast es possible.
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ It will also serve requests via a REST API. These requests are mainly for checki
 If this application fails to function properly, there will be impact on other applications.
 
 ```
-( internet ) ---> [ api-gw ] ---> [ gopher_skeleton ] ---> [ storageAl ] ---> [ mongo DB ]
+( internet ) ---> [ api-gw ] ---> [ gopher-user-ecomy ] 
                       ^                   |
                       |                   |
                       +----[ registry ]<--+
@@ -40,11 +40,11 @@ For a proper functioning, this application depends on the following services:
     +------------------+-------------------------------------------+
     |     Service      |    Purpose                                |
     |------------------|-------------------------------------------|
-    | Storage service  | to store skeleton dara in mongo DB        |
+    | Storage service  | to store ecomy dara in mongo DB        |
     |------------------|-------------------------------------------|
-    | Vehicles service | to store skeleton dara in mongo DB        |
+    | Vehicles service | to store ecomy dara in mongo DB        |
     |------------------|-------------------------------------------|
-    | Storage service  | to store skeleton dara in mongo DB        |
+    | Storage service  | to store ecomy dara in mongo DB        |
     |------------------|-------------------------------------------|
     | Users service    | to request basic user data                |
     +------------------+-------------------------------------------+
@@ -52,7 +52,7 @@ For a proper functioning, this application depends on the following services:
 ### Local build
 #### Git clone
 ```bash
-git clone https://collaboration.msi.audi.com/stash/scm/betacore/gopher_skeleton.git
+git clone https://collaboration.msi.audi.com/stash/scm/betacore/gopher-user-ecomy.git
 ```
 #### running automated tests
 To run tests
@@ -95,4 +95,4 @@ Build service :
 * [Kamal Koubaa](https://collaboration.msi.audi.com/stash/users/kamal.koubaa_valtech-mobility.com)
 * [Daniel Spelmezan](https://collaboration.msi.audi.com/stash/plugins/servlet/network/profile/daniel.spelmezan@valtech-mobility.com)
 
-See also the list of [contributors](https://collaboration.msi.audi.com/stash/plugins/servlet/network/contributorsgraph/BETACORE/gopher_skeleton) who participated in this project.
+See also the list of [contributors](https://collaboration.msi.audi.com/stash/plugins/servlet/network/contributorsgraph/BETACORE/gopher-user-ecomy) who participated in this project.

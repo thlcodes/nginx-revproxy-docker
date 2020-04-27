@@ -38,30 +38,6 @@ func (c *Config) UpdateFromEnv() []error {
 		}
 	}
 
-	if val, exists = os.LookupEnv("GREETER_DEFAULTNAME"); exists {
-		c.Greeter.DefaultName = val
-	}
-
-	if val, exists = os.LookupEnv("GREETER_HELLO"); exists {
-		c.Greeter.Hello = val
-	}
-
-	if val, exists = os.LookupEnv("GREETER_INAPPROPRIATENAMES"); exists {
-		if v, err := parseStringSlice(val); err == nil {
-			c.Greeter.InappropriateNames = v
-		} else {
-			errors = append(errors, fmt.Errorf("Genfig: could not parse []string from CONFIG_GREETER_INAPPROPRIATENAMES ('%s')\n", val))
-		}
-	}
-
-	if val, exists = os.LookupEnv("GREETER_MAXKNOWNUSERS"); exists {
-		if v, err := parseInt64(val); err == nil {
-			c.Greeter.MaxKnownUsers = v
-		} else {
-			errors = append(errors, fmt.Errorf("Genfig: could not parse int64 from CONFIG_GREETER_MAXKNOWNUSERS ('%s')\n", val))
-		}
-	}
-
 	if val, exists = os.LookupEnv("GRPCPORT"); exists {
 		if v, err := parseInt64(val); err == nil {
 			c.GrpcPort = v
@@ -82,16 +58,16 @@ func (c *Config) UpdateFromEnv() []error {
 		}
 	}
 
-	if val, exists = os.LookupEnv("REGISTRY"); exists {
-		c.Registry = val
-	}
-
 	if val, exists = os.LookupEnv("SERVICE_NAME"); exists {
 		c.Service.Name = val
 	}
 
 	if val, exists = os.LookupEnv("SERVICE_VERSION"); exists {
 		c.Service.Version = val
+	}
+
+	if val, exists = os.LookupEnv("SERVICES_REGISTRY"); exists {
+		c.Services.Registry = val
 	}
 
 	if val, exists = os.LookupEnv("SERVICES_STORAGE_ADDR"); exists {

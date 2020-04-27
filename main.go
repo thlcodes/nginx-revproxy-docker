@@ -3,11 +3,11 @@
 package main
 
 import (
-	"dev.beta.audi/gorepo/gopher_skeleton/internal/generated/config"
+	"dev.beta.audi/gorepo/gopher-user-ecomy/internal/generated/config"
 
 	"dev.beta.audi/gorepo/lib-go-common/common"
 
-	"dev.beta.audi/gorepo/gopher_skeleton/internal/configuration"
+	"dev.beta.audi/gorepo/gopher-user-ecomy/internal/configuration"
 )
 
 func main() {

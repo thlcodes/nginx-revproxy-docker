@@ -7,8 +7,8 @@ import (
 
 	httplib "dev.beta.audi/gorepo/lib-go-common/http"
 
-	"dev.beta.audi/gorepo/gopher_skeleton/internal/configuration"
-	"dev.beta.audi/gorepo/gopher_skeleton/internal/generated/config"
+	"dev.beta.audi/gorepo/gopher-user-ecomy/internal/configuration"
+	"dev.beta.audi/gorepo/gopher-user-ecomy/internal/generated/config"
 
 	"github.com/stretchr/testify/require"
 )

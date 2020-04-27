@@ -24,26 +24,17 @@ func (c *Config) WriteToEnv() {
 
 	_ = os.Setenv("DEBUG", fmt.Sprintf("%v", c.Debug))
 
-	_ = os.Setenv("GREETER_DEFAULTNAME", fmt.Sprintf("%v", c.Greeter.DefaultName))
-
-	_ = os.Setenv("GREETER_HELLO", fmt.Sprintf("%v", c.Greeter.Hello))
-
-	buf, _ = json.Marshal(c.Greeter.InappropriateNames)
-	_ = os.Setenv("GREETER_INAPPROPRIATENAMES", string(buf))
-
-	_ = os.Setenv("GREETER_MAXKNOWNUSERS", fmt.Sprintf("%v", c.Greeter.MaxKnownUsers))
-
 	_ = os.Setenv("GRPCPORT", fmt.Sprintf("%v", c.GrpcPort))
 
 	_ = os.Setenv("HOST", fmt.Sprintf("%v", c.Host))
 
 	_ = os.Setenv("PORT", fmt.Sprintf("%v", c.Port))
 
-	_ = os.Setenv("REGISTRY", fmt.Sprintf("%v", c.Registry))
-
 	_ = os.Setenv("SERVICE_NAME", fmt.Sprintf("%v", c.Service.Name))
 
 	_ = os.Setenv("SERVICE_VERSION", fmt.Sprintf("%v", c.Service.Version))
+
+	_ = os.Setenv("SERVICES_REGISTRY", fmt.Sprintf("%v", c.Services.Registry))
 
 	_ = os.Setenv("SERVICES_STORAGE_ADDR", fmt.Sprintf("%v", c.Services.Storage.Addr))
 

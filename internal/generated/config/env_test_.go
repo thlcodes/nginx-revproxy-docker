@@ -7,21 +7,15 @@ func init() {
 		Apipath:  "v1",
 		Basepath: "",
 		Debug:    true,
-		Greeter: ConfigGreeter{
-			DefaultName:        "World",
-			Hello:              "Hello",
-			InappropriateNames: []string{"Thomas", "idiot"},
-			MaxKnownUsers:      3,
-		},
 		GrpcPort: 5050,
 		Host:     "localhost",
 		Port:     8080,
-		Registry: "",
 		Service: ConfigService{
-			Name:    "gopher-shared-skeleton",
-			Version: "v1",
+			Name:    "gopher-user-ecomy",
+			Version: "v0",
 		},
 		Services: ConfigServices{
+			Registry: "",
 			Storage: ConfigServicesStorage{
 				Addr: "",
 			},
@@ -33,5 +27,5 @@ func init() {
 			Uri:     "",
 		},
 	}
-	Envs.Test._map = map[string]interface{}{"apipath": "v1", "basepath": "", "debug": true, "greeter": map[interface{}]interface{}{"defaultName": "World", "hello": "Hello", "inappropriateNames": []interface{}{"Thomas", "idiot"}, "maxKnownUsers": 3}, "grpcPort": 5050, "host": "localhost", "port": 8080, "registry": "", "service": map[interface{}]interface{}{"name": "gopher-shared-skeleton", "version": "v1"}, "services": map[interface{}]interface{}{"storage": map[interface{}]interface{}{"addr": ""}}, "trace": false, "tracing": map[interface{}]interface{}{"secret": "", "service": "", "uri": ""}}
+	Envs.Test._map = map[string]interface{}{"apipath": "v1", "basepath": "", "debug": true, "grpcPort": 5050, "host": "localhost", "port": 8080, "service": map[interface{}]interface{}{"name": "gopher-user-ecomy", "version": "v0"}, "services": map[interface{}]interface{}{"registry": "", "storage": map[interface{}]interface{}{"addr": ""}}, "trace": false, "tracing": map[interface{}]interface{}{"secret": "", "service": "", "uri": ""}}
 }

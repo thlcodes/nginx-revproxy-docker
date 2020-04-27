@@ -28,6 +28,30 @@
       "problemMatcher": []
     },
     {
+      "label": "generate config",
+      "type": "shell",
+      "command": "task genfig",
+      "presentation": {
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "generate mocks",
+      "type": "shell",
+      "command": "task mocks",
+      "presentation": {
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "build debug binary",
       "type": "shell",
       "command": "mkdir -p \"${workspaceFolder}/build/debug\" && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -gcflags \"all=-N -l\" -o \"${workspaceFolder}/build/debug/bin\"",
@@ -44,7 +68,7 @@
     {
       "label": "start debug container",
       "type": "shell",
-      "command": "docker run -it --rm -v \"${workspaceFolder}:/app\" -p 4040:4040 -p 8123:8080 -p 5050 --network gopher --name ${workspaceFolderBasename}-debug -e ENV=local -e DLV_LOG=true -e CONTINUE=false -e BINARY=./build/debug/bin godebocker",
+      "command": "docker run -it --rm -v \"${workspaceFolder}:/app\" -p 4040:4040 -p 8123:8080 -p 5123:5050 --network gopher --name ${workspaceFolderBasename}-debug -e ENV=local -e DLV_LOG=true -e CONTINUE=false -e BINARY=./build/debug/bin godebocker",
       "isBackground": true,
       "dependsOn": [
         "build debug binary"

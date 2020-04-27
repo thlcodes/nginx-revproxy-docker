@@ -1,20 +1,15 @@
 service:
-  name: gopher-shared-skeleton
-  version: v1
+  name: gopher-user-ecomy
+  version: v0
 port: 8080
 grpcPort: 5050
 host: ""
 basepath: ""
 trace: false
 apipath: "v1"
-registry: ""
 debug: false
-greeter:
-  hello: "Hello"
-  maxKnownUsers: 100
-  defaultName: "World"
-  inappropriateNames: ["Thomas", "idiot"] 
 services:
+  registry: ""
   storage: 
     addr: ""
 tracing:

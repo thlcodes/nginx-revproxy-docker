@@ -52,17 +52,13 @@ func (c *Config) substitute() int {
 
 		"${basepath}", c.Basepath,
 
-		"${greeter.defaultname}", c.Greeter.DefaultName,
-
-		"${greeter.hello}", c.Greeter.Hello,
-
 		"${host}", c.Host,
-
-		"${registry}", c.Registry,
 
 		"${service.name}", c.Service.Name,
 
 		"${service.version}", c.Service.Version,
+
+		"${services.registry}", c.Services.Registry,
 
 		"${services.storage.addr}", c.Services.Storage.Addr,
 
@@ -89,34 +85,10 @@ func (c *Config) substitute() int {
 		}
 	}
 
-	if strings.Contains(c.Greeter.DefaultName, "${") {
-		cnt += 1
-		c.Greeter.DefaultName = r.Replace(c.Greeter.DefaultName)
-		if !strings.Contains(c.Greeter.DefaultName, "${") {
-			cnt -= 1
-		}
-	}
-
-	if strings.Contains(c.Greeter.Hello, "${") {
-		cnt += 1
-		c.Greeter.Hello = r.Replace(c.Greeter.Hello)
-		if !strings.Contains(c.Greeter.Hello, "${") {
-			cnt -= 1
-		}
-	}
-
 	if strings.Contains(c.Host, "${") {
 		cnt += 1
 		c.Host = r.Replace(c.Host)
 		if !strings.Contains(c.Host, "${") {
-			cnt -= 1
-		}
-	}
-
-	if strings.Contains(c.Registry, "${") {
-		cnt += 1
-		c.Registry = r.Replace(c.Registry)
-		if !strings.Contains(c.Registry, "${") {
 			cnt -= 1
 		}
 	}
@@ -133,6 +105,14 @@ func (c *Config) substitute() int {
 		cnt += 1
 		c.Service.Version = r.Replace(c.Service.Version)
 		if !strings.Contains(c.Service.Version, "${") {
+			cnt -= 1
+		}
+	}
+
+	if strings.Contains(c.Services.Registry, "${") {
+		cnt += 1
+		c.Services.Registry = r.Replace(c.Services.Registry)
+		if !strings.Contains(c.Services.Registry, "${") {
 			cnt -= 1
 		}
 	}

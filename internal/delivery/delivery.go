@@ -2,11 +2,7 @@
 package delivery
 
 import (
-	greeter "dev.beta.audi/gorepo/lib_proto_models/golib/greeter"
+	ecomypb "dev.beta.audi/gorepo/lib_proto_models/golib/ecomy"
 )
 
-// GreeterServer is the server API.
-type GreeterServer = greeter.GreeterServiceServer
-
-// GreeterClient is the client API.
-type GreeterClient = greeter.GreeterServiceClient
+type EcomyService = ecomypb.EcomyServiceServer

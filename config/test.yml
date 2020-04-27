@@ -1,4 +1,2 @@
 host: localhost
 debug: true
-greeter:
-  maxKnownUsers: 3

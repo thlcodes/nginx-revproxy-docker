@@ -10,13 +10,12 @@ import (
 	"time"
 
 	"dev.beta.audi/gorepo/lib-go-common/http"
-	"dev.beta.audi/gorepo/lib_proto_models/golib/greeter"
-	"dev.beta.audi/gorepo/lib_proto_models/golib/registry"
-	"dev.beta.audi/gorepo/lib_proto_models/golib/storage"
+	ecomypb "dev.beta.audi/gorepo/lib_proto_models/golib/ecomy"
+	registrypb "dev.beta.audi/gorepo/lib_proto_models/golib/registry"
 
-	integrationtests "dev.beta.audi/gorepo/gopher_skeleton/integration"
-	"dev.beta.audi/gorepo/gopher_skeleton/internal/configuration"
-	"dev.beta.audi/gorepo/gopher_skeleton/internal/generated/config"
+	integrationtests "dev.beta.audi/gorepo/gopher-user-ecomy/integration"
+	"dev.beta.audi/gorepo/gopher-user-ecomy/internal/configuration"
+	"dev.beta.audi/gorepo/gopher-user-ecomy/internal/generated/config"
 
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/stretchr/testify/mock"
@@ -33,15 +32,15 @@ var (
 	err error
 
 	service          *configuration.Service
-	client           greeter.GreeterServiceClient
+	statusClient     ecomypb.EcomyServiceClient
 	clientConnection *grpc.ClientConn
 
-	registryMock       = &registry.MockRegistryServiceServer{}
+	registryMock       = &registrypb.MockRegistryServiceServer{}
 	registryMockServer *grpc.Server
 
 	// Add your mock server variables here
-	storageMock       = &storage.MockStorageServiceServer{}
-	storageMockServer *grpc.Server
+	//storageMock       = &storage.MockStorageServiceServer{}
+	//storageMockServer *grpc.Server
 )
 
 /*
@@ -54,15 +53,15 @@ var _ = BeforeSuite(func() {
 
 	cfg.Port = int64(http.GetFreePort())
 	cfg.GrpcPort = int64(http.GetFreePort())
-	cfg.Registry = cfg.Host + ":" + strconv.Itoa(http.GetFreePort())
-	cfg.Services.Storage.Addr = cfg.Host + ":" + strconv.Itoa(http.GetFreePort())
+	cfg.Services.Registry = cfg.Host + ":" + strconv.Itoa(http.GetFreePort())
+	//cfg.Services.Storage.Addr = cfg.Host + ":" + strconv.Itoa(http.GetFreePort())
 
-	registryMockServer = integrationtests.CreateRegistryServerMock(registryMock, cfg.Registry)
+	registryMockServer = integrationtests.CreateRegistryServerMock(registryMock, cfg.Services.Registry)
 	registryMock.On("AddServiceInstance", mock.Anything, mock.Anything).Return(&empty.Empty{}, nil)
 	registryMock.On("RemoveServiceInstance", mock.Anything, mock.Anything).Return(&empty.Empty{}, nil)
 
 	// Add and start your mock servers here
-	storageMockServer = integrationtests.CreateStorageServerMock(storageMock, cfg.Services.Storage.Addr)
+	//storageMockServer = integrationtests.CreateStorageServerMock(storageMock, cfg.Services.Storage.Addr)
 
 	// Start the service as it is done in main()
 	go func() {
@@ -78,7 +77,7 @@ var _ = BeforeSuite(func() {
 
 	var address = fmt.Sprintf(cfg.Host+":%v", cfg.GrpcPort)
 	clientConnection, err = grpc.Dial(address, grpc.WithInsecure())
-	client = greeter.NewGreeterServiceClient(clientConnection)
+	statusClient = ecomypb.NewEcomyServiceClient(clientConnection)
 	Expect(err).NotTo(HaveOccurred(), "did not connect: %v", err)
 })
 
@@ -89,7 +88,7 @@ var _ = AfterSuite(func() {
 	Expect(err).NotTo(HaveOccurred(), "failed to close connection")
 
 	// Stop your mock servers here
-	storageMockServer.GracefulStop()
+	//storageMockServer.GracefulStop()
 
 	err = service.Stop()
 	Expect(err).NotTo(HaveOccurred(), "failed to stop service: %v", err)

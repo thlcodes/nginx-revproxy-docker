@@ -6,23 +6,14 @@ type Config struct {
 	Apipath  string
 	Basepath string
 	Debug    bool
-	Greeter  ConfigGreeter
 	GrpcPort int64
 	Host     string
 	Port     int64
-	Registry string
 	Service  ConfigService
 	Services ConfigServices
 	Trace    bool
 	Tracing  ConfigTracing
 	_map     map[string]interface{}
-}
-
-type ConfigGreeter struct {
-	DefaultName        string
-	Hello              string
-	InappropriateNames []string
-	MaxKnownUsers      int64
 }
 
 type ConfigService struct {
@@ -31,7 +22,8 @@ type ConfigService struct {
 }
 
 type ConfigServices struct {
-	Storage ConfigServicesStorage
+	Registry string
+	Storage  ConfigServicesStorage
 }
 
 type ConfigServicesStorage struct {

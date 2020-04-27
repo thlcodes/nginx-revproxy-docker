@@ -1,2 +1,2 @@
-// Package grpc implements the delivery layer API.
+// Package grpc implements the GRPC services for ecomy
 package grpc
